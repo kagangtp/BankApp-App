@@ -1,5 +1,5 @@
 {
-  "DASHBOARD_PAGE": {
+  "CUSTOMERS_DISPLAY_PAGE": {
     "TITLE": "Müşteri Yönetimi",
     "SUBTITLE": "Sistemde kayıtlı müşterilerin listesi.",
     "SEARCH_PLACEHOLDER": "Müşteri ismi veya e-postası ara...",

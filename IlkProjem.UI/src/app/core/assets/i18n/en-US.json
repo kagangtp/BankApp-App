@@ -8,7 +8,7 @@
     "SETTINGS": "Settings",
     "LOGOUT": "Logout"
   },
-  "DASHBOARD_PAGE": {
+  "CUSTOMERS_DISPLAY_PAGE": {
     "TITLE": "Customer Management",
     "SUBTITLE": "List of customers registered in the system.",
     "SEARCH_PLACEHOLDER": "Search customer name or email...",
@@ -190,6 +190,8 @@
     "DARK_MODE_LABEL": "Dark Mode",
     "LANGUAGE_TITLE": "Language & Region",
     "LANGUAGE_DESC": "Select your preferred language.",
-    "LANGUAGE_LABEL": "Application Language"
+    "LANGUAGE_LABEL": "Application Language",
+    "COLOR_TITLE": "UI Color",
+    "COLOR_DESC": "Change the application color."
   }
 }

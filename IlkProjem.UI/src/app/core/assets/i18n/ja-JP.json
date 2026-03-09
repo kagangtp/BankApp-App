@@ -8,7 +8,7 @@
         "SETTINGS": "設定",
         "LOGOUT": "ログアウト"
     },
-    "DASHBOARD_PAGE": {
+    "CUSTOMERS_DISPLAY_PAGE": {
         "TITLE": "顧客管理",
         "SUBTITLE": "システムに登録された顧客リスト。",
         "SEARCH_PLACEHOLDER": "顧客名またはメールを検索...",

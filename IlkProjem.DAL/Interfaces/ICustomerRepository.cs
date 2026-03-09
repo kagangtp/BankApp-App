@@ -2,7 +2,7 @@
 using IlkProjem.Core.Models;
 using IlkProjem.Core.Specifications;
 
-namespace IlkProjem.DAL.Repositories;
+namespace IlkProjem.DAL.Interfaces;
 public interface ICustomerRepository
 {
     Task<List<Customer>> GetAllAsync(CancellationToken ct = default);

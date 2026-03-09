@@ -8,7 +8,7 @@
         "SETTINGS": "설정",
         "LOGOUT": "로그아웃"
     },
-    "DASHBOARD_PAGE": {
+    "CUSTOMERS_DISPLAY_PAGE": {
         "TITLE": "고객 관리",
         "SUBTITLE": "시스템에 등록된 고객 목록.",
         "SEARCH_PLACEHOLDER": "고객 이름 또는 이메일 검색...",

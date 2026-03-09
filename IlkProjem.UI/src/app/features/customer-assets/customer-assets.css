@@ -1,6 +1,6 @@
 .assets-wrapper {
     padding: 32px;
-    background-color: #f8fafc;
+    background-color: var(--bg-primary, #f8fafc);
     min-height: calc(100vh - 64px);
 }
 
@@ -13,7 +13,7 @@
     gap: 24px;
     margin-bottom: 40px;
     padding-bottom: 24px;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
 }
 
 .profile-header-flex {
@@ -33,13 +33,13 @@
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color, #e2e8f0);
     display: block;
-    background-color: #f1f5f9;
+    background-color: var(--bg-tertiary, #f1f5f9);
 }
 
 .profile-details h1 {
-    color: #0f172a;
+    color: var(--text-primary, #0f172a);
     font-size: 1.875rem;
     font-weight: 800;
     letter-spacing: -0.025em;
@@ -48,7 +48,7 @@
 }
 
 .profile-details p {
-    color: #64748b;
+    color: var(--text-secondary, #64748b);
     font-size: 1rem;
     margin: 0;
     margin-top: 4px;
@@ -56,25 +56,25 @@
 
 /* Buttons */
 .btn-back {
-    background: white;
-    border: 1px solid #e2e8f0;
+    background: var(--card-bg, white);
+    border: 1px solid var(--border-color, #e2e8f0);
     padding: 10px 20px;
     border-radius: 12px;
     font-weight: 700;
     font-size: 0.875rem;
-    color: #475569;
+    color: var(--text-secondary, #475569);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .btn-back:hover {
-    background: #f1f5f9;
+    background: var(--bg-tertiary, #f1f5f9);
     transform: translateX(-2px);
 }
 
 .btn-add,
 .btn-add-profile-photo {
-    background: #6366f1;
+    background: var(--accent-primary, #6366f1);
     color: white;
     padding: 10px 20px;
     border-radius: 12px;
@@ -89,9 +89,9 @@
 
 .btn-add:hover,
 .btn-add-profile-photo:hover {
-    background: #4f46e5;
+    background: var(--accent-hover, #4f46e5);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 12px var(--card-border, rgba(99, 102, 241, 0.3));
 }
 
 /* Sections */
@@ -107,7 +107,7 @@
 }
 
 .section-header h2 {
-    color: #1e293b;
+    color: var(--text-primary, #1e293b);
     font-size: 1.4rem;
     font-weight: 700;
 }
@@ -120,9 +120,9 @@
 }
 
 .asset-card {
-    background: white;
+    background: var(--card-bg, white);
     border-radius: 16px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--card-border, #e2e8f0);
     padding: 20px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -142,12 +142,12 @@
 
 .asset-card:hover {
     transform: translateY(-2px);
-    border-color: #6366f1;
-    box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.1);
+    border-color: var(--accent-primary, #6366f1);
+    box-shadow: 0 10px 20px -5px var(--card-border, rgba(99, 102, 241, 0.1));
 }
 
 .asset-card:hover::before {
-    background-color: #6366f1;
+    background-color: var(--accent-primary, #6366f1);
 }
 
 .asset-card-header {
@@ -158,8 +158,8 @@
 }
 
 .asset-badge {
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--bg-tertiary, #f1f5f9);
+    color: var(--text-secondary, #475569);
     padding: 4px 10px;
     border-radius: 8px;
     font-size: 0.75rem;
@@ -169,12 +169,12 @@
 
 .asset-title {
     font-weight: 700;
-    color: #1e293b;
+    color: var(--text-primary, #1e293b);
     font-size: 1.05rem;
 }
 
 .asset-desc {
-    color: #64748b;
+    color: var(--text-secondary, #64748b);
     font-size: 0.9rem;
     margin-bottom: 12px;
 }
@@ -186,7 +186,7 @@
     gap: 8px;
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid var(--border-color, #f1f5f9);
 }
 
 .image-thumb {
@@ -194,15 +194,15 @@
     height: 100px;
     border-radius: 12px;
     overflow: hidden;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color, #e2e8f0);
     transition: all 0.2s;
     cursor: pointer;
 }
 
 .image-thumb:hover {
-    border-color: #6366f1;
+    border-color: var(--accent-primary, #6366f1);
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 4px 12px var(--card-border, rgba(99, 102, 241, 0.2));
 }
 
 .image-thumb img {
@@ -214,25 +214,26 @@
 .no-images {
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px solid #f1f5f9;
-    color: #94a3b8;
+    border-top: 1px solid var(--border-color, #f1f5f9);
+    color: var(--text-muted, #94a3b8);
     font-size: 0.85rem;
     font-style: italic;
 }
 
 .empty-section {
-    background: white;
+    background: var(--card-bg, white);
     padding: 40px;
     border-radius: 16px;
-    border: 1px dashed #cbd5e1;
+    border: 1px dashed var(--border-color, #cbd5e1);
     text-align: center;
-    color: #94a3b8;
+    color: var(--text-muted, #94a3b8);
 }
 
 .btn-edit {
     margin-left: auto;
     background: none;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color, #e2e8f0);
+    color: var(--text-secondary);
     border-radius: 8px;
     padding: 4px 10px;
     cursor: pointer;
@@ -241,8 +242,9 @@
 }
 
 .btn-edit:hover {
-    background: #eef2ff;
-    border-color: #6366f1;
+    background: var(--bg-tertiary, #eef2ff);
+    border-color: var(--accent-primary, #6366f1);
+    color: var(--accent-primary);
 }
 
 .lightbox-overlay {
@@ -326,4 +328,36 @@
         width: 100%;
         justify-content: center;
     }
+}
+
+/* --- Dark Mode Overrides (Assists ViewEncapsulation) --- */
+:host-context(.dark-theme) .assets-wrapper {
+    background-color: var(--bg-primary);
+}
+
+:host-context(.dark-theme) .asset-card,
+:host-context(.dark-theme) .empty-section {
+    background: var(--card-bg);
+    border-color: var(--card-border);
+}
+
+:host-context(.dark-theme) .asset-title,
+:host-context(.dark-theme) .profile-details h1 {
+    color: var(--text-primary);
+}
+
+:host-context(.dark-theme) .asset-desc,
+:host-context(.dark-theme) .profile-details p,
+:host-context(.dark-theme) .asset-badge {
+    color: var(--text-secondary);
+}
+
+:host-context(.dark-theme) .btn-back {
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+:host-context(.dark-theme) .asset-badge {
+    background: var(--bg-tertiary);
 }

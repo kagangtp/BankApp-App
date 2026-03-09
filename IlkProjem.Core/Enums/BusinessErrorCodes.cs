@@ -34,6 +34,8 @@ public enum BusinessErrorCode
     FileRecordNotFound       = 1501, // Download/Delete: Dosya kaydı DB'de bulunamadı
     FileNotFoundOnDisk       = 1502, // Download: Dosya diskte bulunamadı
     FileAssignFailed         = 1503, // AssignOwner: Dosya ataması başarısız
+    FileTooLarge             = 1504, // Upload: Dosya boyutu limitin üzerinde (YENİ)
+    DuplicateFile            = 1505, // Upload: Aynı hash değerine sahip dosya mevcut (YENİ)
 
     // ─── Calculator Servis (60) ─────────────────
     CalculatorDivideByZero   = 1601, // Divide: Sıfıra bölme hatası

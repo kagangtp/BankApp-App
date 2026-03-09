@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { ThemeService } from '../../core/services/themeService';
 
 @Component({
   selector: 'app-settings',
@@ -11,25 +12,42 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class Settings implements OnInit {
   isDarkMode = false;
+  selectedColor = '#5d5fef'; // HTML'deki isimlendirme ile uyumlu
+  availableColors: string[] = []; // HTML'deki döngü için
 
+  private themeService = inject(ThemeService);
 
   ngOnInit() {
-    // Tema kontrolü
+    // Renk paletini servisten al
+    this.availableColors = this.themeService.getAvailableColors();
+
+    // Kayıtlı tercihlerini yükle
+    const savedColor = localStorage.getItem('accent-color');
+    this.selectedColor = savedColor || '#5d5fef';
+    this.themeService.setThemeColor(this.selectedColor);
+
     const savedTheme = localStorage.getItem('theme');
     this.isDarkMode = savedTheme === 'dark';
-    if (this.isDarkMode) {
-      document.body.classList.add('dark-theme');
-    }
+    this.applyTheme();
   }
 
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
+    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+    this.applyTheme();
+  }
+
+  private applyTheme() {
     if (this.isDarkMode) {
       document.body.classList.add('dark-theme');
-      localStorage.setItem('theme', 'dark');
     } else {
       document.body.classList.remove('dark-theme');
-      localStorage.setItem('theme', 'light');
     }
+  }
+
+  selectColor(color: string) {
+    this.selectedColor = color; // Aktif rengi güncelle
+    this.themeService.setThemeColor(color);
+    localStorage.setItem('accent-color', color);
   }
 }

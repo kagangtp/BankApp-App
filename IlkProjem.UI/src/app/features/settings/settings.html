@@ -1,6 +1,4 @@
 <div class="settings-wrapper">
-
-    <!-- Header -->
     <div class="header-section">
         <div class="title-area">
             <h1>{{ 'SETTINGS_PAGE.TITLE' | translate }}</h1>
@@ -9,9 +7,8 @@
     </div>
 
     <div class="settings-content">
-
-        <!-- Theme Card -->
         <div class="settings-card">
+            <div class="card-accent"></div>
             <div class="card-left">
                 <div class="card-icon">🌙</div>
                 <div class="card-info">
@@ -28,5 +25,22 @@
             </div>
         </div>
 
+        <div class="settings-card">
+            <div class="card-accent"></div>
+            <div class="card-left">
+                <div class="card-icon">🎨</div>
+                <div class="card-info">
+                    <h3>{{ 'SETTINGS_PAGE.COLOR_TITLE' | translate }}</h3>
+                    <p>{{ 'SETTINGS_PAGE.COLOR_DESC' | translate }}</p>
+                </div>
+            </div>
+            <div class="card-right">
+                <div class="color-grid">
+                    <div *ngFor="let color of availableColors" class="color-dot" [style.backgroundColor]="color"
+                        [class.active]="color === selectedColor" (click)="selectColor(color)">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

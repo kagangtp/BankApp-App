@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using IlkProjem.DAL.Data;
 using IlkProjem.BLL.Services;
 using IlkProjem.DAL.Repositories;
-using IlkProjem.BLL.Interfaces;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.Extensions.Localization;
@@ -18,6 +17,8 @@ using IlkProjem.DAL.Interceptors;
 using IlkProjem.API.Middlewares;
 using Serilog;
 using FluentValidation;
+using IlkProjem.BLL.Interfaces;
+using IlkProjem.DAL.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -8,7 +8,7 @@
         "SETTINGS": "الإعدادات",
         "LOGOUT": "تسجيل الخروج"
     },
-    "DASHBOARD_PAGE": {
+    "CUSTOMERS_DISPLAY_PAGE": {
         "TITLE": "إدارة العملاء",
         "SUBTITLE": "قائمة العملاء المسجلين في النظام.",
         "SEARCH_PLACEHOLDER": "البحث عن اسم العميل أو البريد...",

@@ -1,0 +1,465 @@
+.customers-display-wrapper {
+    padding: 32px;
+    background-color: var(--bg-primary, #f8fafc);
+    transition: background-color 0.3s ease;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+    padding-bottom: 24px;
+}
+
+.title-area {
+    flex: 0 1 auto;
+}
+
+.header-section h1 {
+    color: var(--text-primary, #0f172a);
+    font-size: 1.875rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 4px;
+}
+
+.header-section p {
+    color: var(--text-secondary, #64748b);
+    font-size: 1rem;
+}
+
+/* --- 2. LİSTE YAPISI VE BAŞLIKLAR --- */
+.customer-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.list-header {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1fr 1fr 100px;
+    padding: 0 24px 8px 24px;
+    color: #94a3b8;
+    /* Slate-400 */
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* --- 3. MODERN LİSTE KARTI (PREMIUM LOOK) --- */
+.list-card {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1fr 1fr 100px;
+    align-items: center;
+    background: var(--card-bg, #ffffff);
+    padding: 20px 24px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color, #e2e8f0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Kartın soluna ince bir vurgu çizgisi */
+.list-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.list-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-primary, #6366f1);
+    box-shadow: 0 10px 20px -5px var(--card-border, rgba(99, 102, 241, 0.1));
+    background: var(--bg-secondary, #ffffff);
+}
+
+.list-card:hover::before {
+    background-color: var(--accent-primary, #4f46e5);
+}
+
+/* --- 4. SÜTUN DETAYLARI --- */
+
+
+.customer-name {
+    font-weight: 700;
+    color: var(--text-primary, #1e293b);
+    font-size: 1rem;
+}
+
+.email-text {
+    color: var(--text-secondary, #64748b);
+    font-size: 0.95rem;
+}
+
+.balance-amount {
+    color: #10b981;
+    /* Emerald-500 */
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.date-text {
+    color: var(--text-muted, #94a3b8);
+    font-size: 0.875rem;
+}
+
+/* --- 5. AKSİYON BUTONLARI --- */
+.col-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.btn-icon {
+    background: var(--bg-primary, #f8fafc);
+    border: 1px solid var(--border-color, #e2e8f0);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.add-btn {
+    flex-shrink: 0;
+    /* Prevents button from getting squashed */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    /* Keeps text on one line */
+}
+
+.btn-icon.edit:hover {
+    background: var(--bg-tertiary, #e0e7ff);
+    color: var(--accent-hover, #4338ca);
+    border-color: var(--accent-primary, #c7d2fe);
+}
+
+.btn-icon.delete:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+
+.btn-icon.assets:hover {
+    background: var(--bg-tertiary, #eef2ff);
+    color: var(--accent-hover, #4338ca);
+    border-color: var(--accent-primary, #c7d2fe);
+}
+
+/* --- 6. MODAL STİLLERİ (GÜZELEŞTİRİLMİŞ) --- */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    /* Cam efekti */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--card-bg, white);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+}
+
+.modal-header {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border-color, #f1f5f9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-body {
+    padding: 32px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-secondary, #475569);
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid var(--border-color, #e2e8f0);
+    background-color: var(--bg-primary, white);
+    color: var(--text-primary, #0f172a);
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-primary, #6366f1);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.modal-footer {
+    padding: 24px 32px;
+    background: var(--bg-primary, #f8fafc);
+    border-top: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 0 0 24px 24px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.btn-primary {
+    background: var(--accent-primary, #6366f1);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- 7. RESPONSIVE DOKUNUŞLAR --- */
+@media (max-width: 1024px) {
+    .list-header {
+        display: none;
+    }
+
+    .list-card {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding: 24px;
+    }
+}
+
+/* --- 8. ARAMA KUTUSU (GÜNCEL) --- */
+.search-container {
+    flex: 1;
+    /* Takes up the middle space */
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    /* Slightly wider for better balance */
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--card-bg, white);
+    width: 100%;
+    padding: 6px 6px 6px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color, #e2e8f0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+}
+
+.search-box:focus-within {
+    border-color: var(--accent-primary, #6366f1);
+    box-shadow: 0 0 0 4px var(--card-border, rgba(99, 102, 241, 0.1));
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    flex: 1;
+    padding: 8px 0;
+    font-size: 0.95rem;
+    color: var(--text-primary, #1e293b);
+}
+
+.btn-search {
+    background-color: var(--bg-primary, #f1f5f9);
+    border: 1px solid var(--border-color, #e2e8f0);
+    color: var(--text-secondary, #475569);
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-search:hover {
+    background-color: var(--bg-tertiary, #e2e8f0);
+    color: var(--text-primary, #0f172a);
+}
+
+/* --- 9. MODERN PAGINATION CONTROLS --- */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.pagination-left,
+.pagination-center,
+.pagination-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pagination-left {
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.pagination-center {
+    flex: 1;
+    justify-content: center;
+}
+
+.pagination-right {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+/* --- EXCEL EXPORT BUTTON --- */
+.btn-export {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    background: var(--bg-tertiary, #ecfdf5);
+    color: #10b981;
+    border: 1px solid var(--border-color, #a7f3d0);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-export:hover {
+    background: #d1fae5;
+    border-color: #6ee7b7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.15);
+}
+
+.btn-pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: 1px solid var(--border-color, #e2e8f0);
+    background: var(--card-bg, white);
+    color: var(--text-secondary, #475569);
+}
+
+/* Specific Style for NEXT (Primary Vibe) */
+.btn-next {
+    background: var(--accent-primary, #6366f1);
+    /* Indigo-500 */
+    color: white;
+    border: none;
+    box-shadow: 0 4px 6px -1px var(--card-border, rgba(99, 102, 241, 0.2));
+}
+
+.btn-next:hover:not(:disabled) {
+    background: var(--accent-hover, #4f46e5);
+    transform: translateX(4px);
+    /* Subtle forward nudge */
+    box-shadow: 0 10px 15px -3px var(--card-border, rgba(99, 102, 241, 0.3));
+}
+
+/* Specific Style for PREVIOUS (Secondary Vibe) */
+.btn-prev:hover:not(:disabled) {
+    background: var(--bg-secondary, #f1f5f9);
+    color: var(--text-primary, #1e293b);
+    transform: translateX(-4px);
+}
+
+/* Disabled State: Matches your Slate theme */
+.btn-pagination:disabled {
+    background: var(--bg-primary, #f8fafc);
+    color: var(--text-muted, #cbd5e1);
+    border-color: var(--border-color, #f1f5f9);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- 10. PAGE SIZE SELECTOR --- */
+.page-size-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card-bg, white);
+    padding: 6px 12px 6px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color, #e2e8f0);
+}
+
+.page-size-selector label {
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--text-secondary, #64748b);
+    white-space: nowrap;
+}
+
+.page-size-selector select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--bg-primary, #f1f5f9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2364748b'/%3E%3C/svg%3E") no-repeat right 10px center;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 8px;
+    padding: 8px 30px 8px 12px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-primary, #1e293b);
+    cursor: pointer;
+    min-width: 60px;
+    transition: all 0.2s;
+}
+
+.page-size-selector select:hover {
+    border-color: var(--accent-primary, #6366f1);
+    background-color: var(--bg-tertiary, #eef2ff);
+}
+
+.page-size-selector select:focus {
+    outline: none;
+    border-color: var(--accent-primary, #6366f1);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}

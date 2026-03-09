@@ -8,7 +8,7 @@
         "SETTINGS": "设置",
         "LOGOUT": "退出"
     },
-    "DASHBOARD_PAGE": {
+    "CUSTOMERS_DISPLAY_PAGE": {
         "TITLE": "客户管理",
         "SUBTITLE": "系统中注册的客户列表。",
         "SEARCH_PLACEHOLDER": "搜索客户姓名或邮箱...",

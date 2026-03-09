@@ -1,4 +1,4 @@
-using IlkProjem.DAL.Repositories;
+using IlkProjem.DAL.Interfaces;
 using IlkProjem.Core.Models;
 using IlkProjem.Core.Dtos.CustomerDtos;
 using IlkProjem.BLL.Interfaces;

@@ -1,6 +1,6 @@
 using IlkProjem.Core.Models;
 
-namespace IlkProjem.DAL.Repositories;
+namespace IlkProjem.DAL.Interfaces;
 
 public interface IFilesRepository
 {
@@ -10,5 +10,7 @@ public interface IFilesRepository
     Task<List<Files>> GetByOwnerAsync(string ownerType, int ownerId);
     void Update(Files file);
     void Delete(Files file);
+    Task<Files?> GetByHashAsync(string hash);
+    Task<int> CountByPathAsync(string relativePath);
     Task SaveChangesAsync();
 }

@@ -15,6 +15,9 @@ import { EditCar } from './features/edit-car/edit-car';
 import { EditHouse } from './features/edit-house/edit-house';
 import { SendEmail } from './features/send-email/send-email';
 import { Settings } from './features/settings/settings';
+import { UsersDisplay } from './features/users-display/users-display';
+import { CustomerDisplay } from './features/customer-display/customer-display';
+import { Transactions } from './features/transactions/transactions';
 
 export const routes: Routes = [
   { path: 'register', component: RegistrationPage },
@@ -37,6 +40,9 @@ export const routes: Routes = [
       { path: 'customer/:id/edit-house/:houseId', component: EditHouse },
       { path: 'send-email', component: SendEmail },
       { path: 'settings', component: Settings },
+      { path: 'accounts', component: UsersDisplay },
+      { path: 'customers', component: CustomerDisplay },
+      { path: 'transactions', component: Transactions },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

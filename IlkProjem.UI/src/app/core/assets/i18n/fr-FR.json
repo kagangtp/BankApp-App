@@ -8,7 +8,7 @@
         "SETTINGS": "Paramètres",
         "LOGOUT": "Déconnexion"
     },
-    "DASHBOARD_PAGE": {
+    "CUSTOMERS_DISPLAY_PAGE": {
         "TITLE": "Gestion des clients",
         "SUBTITLE": "Liste des clients enregistrés dans le système.",
         "SEARCH_PLACEHOLDER": "Rechercher un nom ou un e-mail...",

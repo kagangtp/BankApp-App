@@ -12,7 +12,7 @@ using IlkProjem.Core.Models;
 using IlkProjem.Core.Utilities.Results;
 using Microsoft.Extensions.Localization;
 using IlkProjem.Core.Resources;
-using IlkProjem.DAL.Repositories;
+using IlkProjem.DAL.Interfaces;
 
 namespace IlkProjem.BLL.Services;
 

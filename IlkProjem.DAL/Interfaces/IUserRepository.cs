@@ -1,6 +1,6 @@
 using IlkProjem.Core.Models;
 
-namespace IlkProjem.DAL.Repositories;
+namespace IlkProjem.DAL.Interfaces;
 
 public interface IUserRepository
 {

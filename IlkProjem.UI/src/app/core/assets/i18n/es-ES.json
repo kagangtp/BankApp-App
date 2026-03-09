@@ -8,7 +8,7 @@
         "SETTINGS": "Configuración",
         "LOGOUT": "Cerrar sesión"
     },
-    "DASHBOARD_PAGE": {
+    "CUSTOMERS_DISPLAY_PAGE": {
         "TITLE": "Gestión de clientes",
         "SUBTITLE": "Lista de clientes registrados en el sistema.",
         "SEARCH_PLACEHOLDER": "Buscar nombre o correo del cliente...",

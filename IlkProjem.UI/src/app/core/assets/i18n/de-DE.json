@@ -8,7 +8,7 @@
         "SETTINGS": "Einstellungen",
         "LOGOUT": "Abmelden"
     },
-    "DASHBOARD_PAGE": {
+    "CUSTOMERS_DISPLAY_PAGE": {
         "TITLE": "Kundenverwaltung",
         "SUBTITLE": "Liste der im System registrierten Kunden.",
         "SEARCH_PLACEHOLDER": "Kundenname oder E-Mail suchen...",

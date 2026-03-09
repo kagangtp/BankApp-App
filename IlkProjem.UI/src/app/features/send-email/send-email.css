@@ -1,6 +1,6 @@
 .form-wrapper {
     padding: 32px;
-    background-color: #f8fafc;
+    background-color: var(--bg-primary, #f8fafc);
     min-height: calc(100vh - 64px);
     display: flex;
     flex-direction: column;
@@ -15,36 +15,36 @@
     max-width: 600px;
     margin-bottom: 32px;
     padding-bottom: 24px;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
 }
 
 .form-header h1 {
-    color: #0f172a;
+    color: var(--text-primary, #0f172a);
     font-size: 1.5rem;
     font-weight: 800;
 }
 
 .btn-back {
-    background: white;
-    border: 1px solid #e2e8f0;
+    background: var(--card-bg, white);
+    border: 1px solid var(--border-color, #e2e8f0);
     padding: 10px 20px;
     border-radius: 12px;
     font-weight: 700;
     font-size: 0.875rem;
-    color: #475569;
+    color: var(--text-secondary, #475569);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .btn-back:hover {
-    background: #f1f5f9;
+    background: var(--bg-tertiary, #f1f5f9);
     transform: translateX(-2px);
 }
 
 .form-card {
-    background: white;
+    background: var(--card-bg, white);
     border-radius: 24px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--card-border, #e2e8f0);
     padding: 32px;
     width: 100%;
     max-width: 600px;
@@ -59,7 +59,7 @@
     display: block;
     font-size: 0.875rem;
     font-weight: 700;
-    color: #475569;
+    color: var(--text-secondary, #475569);
     margin-bottom: 8px;
 }
 
@@ -68,7 +68,9 @@
     width: 100%;
     padding: 14px 16px;
     border-radius: 12px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color, #e2e8f0);
+    background: var(--input-bg, white);
+    color: var(--text-primary, #0f172a);
     transition: all 0.2s;
     font-size: 1rem;
     font-family: inherit;
@@ -79,8 +81,8 @@
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #6366f1;
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    border-color: var(--accent-primary, #6366f1);
+    box-shadow: 0 0 0 4px var(--card-border, rgba(99, 102, 241, 0.1));
 }
 
 /* Footer */
@@ -89,11 +91,11 @@
     gap: 12px;
     justify-content: flex-end;
     padding-top: 24px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid var(--border-color, #f1f5f9);
 }
 
 .btn-primary {
-    background: #6366f1;
+    background: var(--accent-primary, #6366f1);
     color: white;
     padding: 12px 24px;
     border-radius: 12px;
@@ -104,27 +106,65 @@
 }
 
 .btn-primary:hover:not(:disabled) {
-    background: #4f46e5;
+    background: var(--accent-hover, #4f46e5);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 12px var(--card-border, rgba(99, 102, 241, 0.3));
 }
 
 .btn-primary:disabled {
-    background: #cbd5e1;
+    background: var(--bg-tertiary, #cbd5e1);
+    color: var(--text-muted, #94a3b8);
     cursor: not-allowed;
 }
 
 .btn-secondary {
-    background: white;
-    color: #475569;
+    background: var(--card-bg, white);
+    color: var(--text-secondary, #475569);
     padding: 12px 24px;
     border-radius: 12px;
     font-weight: 700;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color, #e2e8f0);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .btn-secondary:hover {
-    background: #f1f5f9;
+    background: var(--bg-tertiary, #f1f5f9);
+}
+
+/* --- Dark Mode Overrides (Email Specific) --- */
+:host-context(.dark-theme) .form-wrapper {
+    background-color: var(--bg-primary);
+}
+
+:host-context(.dark-theme) .form-card {
+    background: var(--card-bg);
+    border-color: var(--card-border);
+}
+
+:host-context(.dark-theme) .form-group input,
+:host-context(.dark-theme) .form-group textarea {
+    background: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+:host-context(.dark-theme) .form-header h1 {
+    color: var(--text-primary);
+}
+
+:host-context(.dark-theme) .form-group label {
+    color: var(--text-secondary);
+}
+
+:host-context(.dark-theme) .btn-back {
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+:host-context(.dark-theme) .btn-secondary {
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
 }

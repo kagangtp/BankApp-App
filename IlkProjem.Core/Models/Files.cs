@@ -22,6 +22,8 @@ public class Files
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+    public string FileHash { get; set; } = string.Empty;
+
     [Column(TypeName = "jsonb")]
     public string? Metadata { get; set; } 
 

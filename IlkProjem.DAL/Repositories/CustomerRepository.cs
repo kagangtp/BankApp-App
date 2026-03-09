@@ -1,6 +1,7 @@
 using IlkProjem.Core.Models;
 using IlkProjem.Core.Specifications;
 using IlkProjem.DAL.Data;
+using IlkProjem.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace IlkProjem.DAL.Repositories;

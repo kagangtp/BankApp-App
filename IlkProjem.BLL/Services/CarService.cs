@@ -3,7 +3,7 @@ using IlkProjem.Core.Dtos.CarDtos;
 using IlkProjem.Core.Dtos.FileDtos;
 using IlkProjem.Core.Models;
 using IlkProjem.Core.Utilities.Results;
-using IlkProjem.DAL.Repositories;
+using IlkProjem.DAL.Interfaces;
 
 namespace IlkProjem.BLL.Services;
 

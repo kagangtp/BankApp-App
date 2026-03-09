@@ -1,5 +1,6 @@
 using IlkProjem.Core.Models;
 using IlkProjem.DAL.Data;
+using IlkProjem.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 

@@ -1,7 +1,7 @@
-using IlkProjem.DAL.Repositories;
 using IlkProjem.Core.Models;
 using IlkProjem.DAL.Data;
 using Microsoft.EntityFrameworkCore;
+using IlkProjem.DAL.Interfaces;
 
 namespace IlkProjem.DAL.Repositories;
 
@@ -50,4 +50,17 @@ public class FilesRepository : IFilesRepository
     {
         await _context.SaveChangesAsync();
     }
+
+    public async Task<Files?> GetByHashAsync(string hash)
+    {
+        return await _context.Files
+            .FirstOrDefaultAsync(f => f.FileHash == hash);
+    }
+
+    public async Task<int> CountByPathAsync(string relativePath)
+    {
+        // Bu yolu (path) kullanan kaç tane kayıt olduğunu sayar
+        return await _context.Files.CountAsync(f => f.RelativePath == relativePath);
+    }
+
 }

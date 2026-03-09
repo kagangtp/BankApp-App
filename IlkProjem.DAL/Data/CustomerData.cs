@@ -39,7 +39,8 @@ public class AppDbContext : DbContext
             entity.ToTable("Files");
             entity.Property(e => e.Metadata).HasColumnType("jsonb");
             entity.HasIndex(e => e.CreatedAt); 
-            entity.HasIndex(e => e.RelativePath).IsUnique();
+            entity.HasIndex(e => e.RelativePath);
+            entity.HasIndex(e => e.FileHash);
         });
 
         // 3. Customer Tablosu

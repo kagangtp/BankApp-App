@@ -8,7 +8,7 @@
         "SETTINGS": "Настройки",
         "LOGOUT": "Выход"
     },
-    "DASHBOARD_PAGE": {
+    "CUSTOMERS_DISPLAY_PAGE": {
         "TITLE": "Управление клиентами",
         "SUBTITLE": "Список клиентов, зарегистрированных в системе.",
         "SEARCH_PLACEHOLDER": "Поиск по имени или электронной почте...",

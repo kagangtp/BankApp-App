@@ -1,0 +1,181 @@
+<div class="customers-display-wrapper">
+    <div class="header-section">
+        <div class="title-area">
+            <h1>{{ 'CUSTOMERS_DISPLAY_PAGE.TITLE' | translate }}</h1>
+            <p>{{ 'CUSTOMERS_DISPLAY_PAGE.SUBTITLE' | translate }}</p>
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input #searchInput type="text" [placeholder]="'CUSTOMERS_DISPLAY_PAGE.SEARCH_PLACEHOLDER' | translate"
+                    (input)="onSearchInput($event)">
+                <button class="btn-search" (click)="executeSearch(searchInput.value)">
+                    {{ 'CUSTOMERS_DISPLAY_PAGE.SEARCH_BUTTON' | translate }}
+                </button>
+            </div>
+        </div>
+
+        <button class="btn-primary add-btn" (click)="onAdd()">
+            <span>+</span> {{ 'CUSTOMERS_DISPLAY_PAGE.ADD_BUTTON' | translate }}
+        </button>
+    </div>
+
+    <div class="customer-list-container">
+        <div class="list-header">
+            <span class="col-name">{{ 'TABLE_HEADERS.NAME' | translate }}</span>
+            <span class="col-email">{{ 'TABLE_HEADERS.EMAIL' | translate }}</span>
+            <span class="col-balance text-end">{{ 'TABLE_HEADERS.BALANCE' | translate }}</span>
+            <span class="col-date">{{ 'TABLE_HEADERS.REGISTER_DATE' | translate }}</span>
+            <span class="col-actions text-center">{{ 'TABLE_HEADERS.ACTIONS' | translate }}</span>
+        </div>
+
+        @for (customer of displayCustomers; track customer.id) {
+        <div class="list-card">
+            <div class="col-name">
+                <span class="customer-name">{{ customer.name }}</span>
+            </div>
+            <div class="col-email">
+                <span class="email-text">{{ customer.email }}</span>
+            </div>
+            <div class="col-balance text-end">
+                <span class="balance-amount" [class.negative]="customer.balance < 0">
+                    {{ customer.balance | currency:'':'symbol-narrow':'1.2-2' }}
+                </span>
+            </div>
+            <div class="col-date">
+                <span class="date-text">{{ customer.createdAt | date:'dd MMM yyyy' }}</span>
+            </div>
+            <div class="col-actions text-center">
+                <button class="btn-icon assets" (click)="goToAssets(customer.id)" title="Varlıklar">📁</button>
+                <button class="btn-icon edit" (click)="onEdit(customer)"
+                    [title]="'MODALS.EDIT_TITLE' | translate">✏️</button>
+                <button class="btn-icon delete" (click)="onDelete(customer.id)" title="Sil">🗑️</button>
+            </div>
+        </div>
+        } @empty {
+        <div class="empty-state">
+            <div class="empty-icon">📁</div>
+            <p>{{ 'EMPTY_STATE' | translate }}</p>
+        </div>
+        }
+    </div>
+
+    <div class="pagination-container">
+        <div class="pagination-left">
+            <button class="btn-export" (click)="exportExcel()">
+                📥 {{ 'CUSTOMERS_DISPLAY_PAGE.EXPORT_EXCEL' | translate }}
+            </button>
+        </div>
+
+        <div class="pagination-center">
+            <button class="btn-pagination btn-prev" (click)="goPrevious()" [disabled]="history.length === 0">
+                <i class="fas fa-chevron-left"></i> {{ 'CUSTOMERS_DISPLAY_PAGE.PREVIOUS_PAGE' | translate }}
+            </button>
+            <button class="btn-pagination btn-next" (click)="goNext()"
+                [disabled]="displayCustomers.length < params.pageSize">
+                {{ 'CUSTOMERS_DISPLAY_PAGE.NEXT_PAGE' | translate }} <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="pagination-right">
+            <div class="page-size-selector">
+                <label for="pageSize">{{ 'CUSTOMERS_DISPLAY_PAGE.SHOW_LABEL' | translate }}</label>
+                <select id="pageSize" [value]="params.pageSize" (change)="onPageSizeChange($event)">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@if (isModalOpen) {
+<div class="modal-backdrop">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>{{ 'MODALS.EDIT_TITLE' | translate }}</h2>
+            <button class="btn-close" (click)="closeModal()">×</button>
+        </div>
+
+        <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="name">{{ 'MODALS.NAME_LABEL' | translate }}</label>
+                    <input id="name" type="text" formControlName="name"
+                        [class.error]="updateForm.get('name')?.invalid && updateForm.get('name')?.touched">
+                    @if (updateForm.get('name')?.invalid && updateForm.get('name')?.touched) {
+                    <small class="error-msg">{{ 'MODALS.NAME_ERROR' | translate }}</small>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label for="email">{{ 'MODALS.EMAIL_LABEL' | translate }}</label>
+                    <input id="email" type="email" formControlName="email"
+                        [class.error]="updateForm.get('email')?.invalid && updateForm.get('email')?.touched">
+                    @if (updateForm.get('email')?.invalid && updateForm.get('email')?.touched) {
+                    <small class="error-msg">{{ 'MODALS.EMAIL_ERROR' | translate }}</small>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label for="balance">{{ 'MODALS.BALANCE_LABEL' | translate }}</label>
+                    <input id="balance" type="number" formControlName="balance">
+                </div>
+
+                <div class="form-group">
+                    <label for="tcKimlikNo">{{ 'MODALS.TC_KIMLIK_LABEL' | translate }}</label>
+                    <input id="tcKimlikNo" type="text" formControlName="tcKimlikNo"
+                        [class.error]="updateForm.get('tcKimlikNo')?.invalid && updateForm.get('tcKimlikNo')?.touched"
+                        maxlength="11">
+                    @if (updateForm.get('tcKimlikNo')?.invalid && updateForm.get('tcKimlikNo')?.touched) {
+                    <small class="error-msg">{{ 'MODALS.TC_KIMLIK_ERROR' | translate }}</small>
+                    }
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">{{ 'MODALS.CANCEL' | translate
+                    }}</button>
+                <button type="submit" class="btn-primary" [disabled]="updateForm.invalid">
+                    {{ 'MODALS.SAVE_CHANGES' | translate }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+}
+
+@if (isAddModalOpen) {
+<div class="modal-backdrop" (click)="isAddModalOpen = false">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>{{ 'MODALS.ADD_TITLE' | translate }}</h2>
+            <button class="btn-close" (click)="isAddModalOpen = false">×</button>
+        </div>
+
+        <form [formGroup]="updateForm" (ngSubmit)="onCreate()">
+            <div class="form-body">
+                <div class="form-group">
+                    <label>{{ 'MODALS.NAME_LABEL' | translate }}</label>
+                    <input type="text" formControlName="name">
+                </div>
+                <div class="form-group">
+                    <label>{{ 'MODALS.EMAIL_LABEL' | translate }}</label>
+                    <input type="email" formControlName="email">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="isAddModalOpen = false">{{ 'MODALS.CANCEL' |
+                    translate
+                    }}</button>
+                <button type="submit" class="btn-primary" [disabled]="updateForm.invalid">{{ 'MODALS.SAVE_CUSTOMER' |
+                    translate
+                    }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+}

@@ -141,7 +141,7 @@ export class CustomerAssets implements OnInit {
     }
 
     goBack() {
-        this.router.navigate(['/mainpage/dashboard']);
+        this.router.navigate(['/mainpage/customers']);
     }
 
     openLightbox(relativePath: string, alt: string) {

@@ -1,7 +1,7 @@
 using IlkProjem.BLL.Interfaces;
 using IlkProjem.Core.Enums;
 using IlkProjem.Core.Exceptions;
-using IlkProjem.DAL.Repositories;
+using IlkProjem.DAL.Interfaces;
 
 namespace IlkProjem.BLL.Services;
 

@@ -9,6 +9,7 @@ import { authInterceptor } from './core/interceptors/auth-interceptor';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { provideToastr } from 'ngx-toastr';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,6 +29,7 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-bottom-right', // Sağ alt köşe profesyonel durur
       preventDuplicates: true,
       progressBar: true,
-    })
+    }),
+    provideCharts(withDefaultRegisterables())
   ]
 };

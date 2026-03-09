@@ -8,7 +8,7 @@
         "SETTINGS": "Setări",
         "LOGOUT": "Deconectare"
     },
-    "DASHBOARD_PAGE": {
+    "CUSTOMERS_DISPLAY_PAGE": {
         "TITLE": "Gestionare clienți",
         "SUBTITLE": "Lista clienților înregistrați în sistem.",
         "SEARCH_PLACEHOLDER": "Căutare nume sau e-mail client...",
