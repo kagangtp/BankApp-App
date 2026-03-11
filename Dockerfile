@@ -7,11 +7,11 @@ COPY IlkProjem.API/IlkProjem.API.csproj IlkProjem.API/
 COPY IlkProjem.BLL/IlkProjem.BLL.csproj IlkProjem.BLL/
 COPY IlkProjem.Core/IlkProjem.Core.csproj IlkProjem.Core/
 COPY IlkProjem.DAL/IlkProjem.DAL.csproj IlkProjem.DAL/
-RUN dotnet restore IlkProjem.API/IlkProjem.API.csproj
+RUN dotnet restore IlkProjem.API/IlkProjem.API.csproj --no-cache
 
 # Copy everything and publish
 COPY . .
-RUN dotnet publish IlkProjem.API/IlkProjem.API.csproj -c Release -o /app/publish
+RUN dotnet publish IlkProjem.API/IlkProjem.API.csproj -c Release -o /app/publish --no-cache
 
 # ---- Runtime Stage ----
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
