@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using IlkProjem.DAL.Data;
 using IlkProjem.BLL.Services;
@@ -50,9 +50,13 @@ builder.Services.AddOpenApi(options =>
 });
 
 // --- 3. DATABASE & SERVICES (BLL/DAL) ---
+// Prefer DATABASE_URL (Railway) over appsettings connection string (local dev)
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
+    ?? builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddScoped<AuditSaveChangesInterceptor>();
 builder.Services.AddDbContext<AppDbContext>((sp, options) =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options.UseNpgsql(connectionString)
            .AddInterceptors(sp.GetRequiredService<AuditSaveChangesInterceptor>()));
 
 var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"] ?? "");
@@ -133,10 +137,11 @@ builder.Services.AddControllers()
     });
 
 // --- 5. CORS (Allowing Angular SPA) ---
+var corsOrigin = Environment.GetEnvironmentVariable("CORS_ORIGIN") ?? "http://localhost:4200";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
-        policy => policy.WithOrigins("http://localhost:4200")
+        policy => policy.WithOrigins(corsOrigin)
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials()); // HttpOnly cookie'ler için gerekli
@@ -144,11 +149,15 @@ builder.Services.AddCors(options =>
 
 // --- 6. SERILOG SETUP (PostgreSQL'e loglama) ---
 
-Log.Logger = new LoggerConfiguration()
+var serilogConfig = new LoggerConfiguration()
     .MinimumLevel.Information()
-    .WriteTo.Console()
-    .WriteTo.PostgreSQL(builder.Configuration.GetConnectionString("DefaultConnection"), "ServiceLog")
-    .CreateLogger();
+    .WriteTo.Console();
+
+// Only write to PostgreSQL if we have a connection string
+if (!string.IsNullOrEmpty(connectionString))
+    serilogConfig = serilogConfig.WriteTo.PostgreSQL(connectionString, "ServiceLog");
+
+Log.Logger = serilogConfig.CreateLogger();
 
 builder.Host.UseSerilog();
 
@@ -159,11 +168,9 @@ var app = builder.Build();
 var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
 app.UseRequestLocalization(locOptions.Value);
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Swagger enabled in all environments for Railway debugging
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // --- 8. STATIC FILE SERVING (Yüklenen dosyalar için) ---
 var storagePath = builder.Configuration["FileSettings:StoragePath"]
@@ -203,4 +210,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.MapOpenApi();
-app.Run("http://localhost:5005");
+// Use PORT env var (Railway sets this automatically), fallback to 5005 for local dev
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5005";
+app.Run($"http://0.0.0.0:{port}");

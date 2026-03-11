@@ -4,6 +4,7 @@ using IlkProjem.Core.Dtos.FileDtos;
 using IlkProjem.Core.Models;
 using IlkProjem.Core.Utilities.Results;
 using IlkProjem.DAL.Interfaces;
+using FluentValidation;
 
 namespace IlkProjem.BLL.Services;
 
@@ -11,15 +12,30 @@ public class CarService : ICarService
 {
     private readonly ICarRepository _carRepository;
     private readonly IFilesService _filesService;
+    private readonly IValidator<CarCreateDto> _createValidator;
+    private readonly IValidator<CarUpdateDto> _updateValidator;
 
-    public CarService(ICarRepository carRepository, IFilesService filesService)
+    public CarService(
+        ICarRepository carRepository,
+        IFilesService filesService,
+        IValidator<CarCreateDto> createValidator,
+        IValidator<CarUpdateDto> updateValidator)
     {
         _carRepository = carRepository;
         _filesService = filesService;
+        _createValidator = createValidator;
+        _updateValidator = updateValidator;
     }
 
     public async Task<IDataResult<int>> AddCar(CarCreateDto createDto, CancellationToken ct = default)
     {
+        var validationResult = await _createValidator.ValidateAsync(createDto, ct);
+        if (!validationResult.IsValid)
+        {
+            var errors = string.Join(" | ", validationResult.Errors.Select(e => e.ErrorMessage));
+            return new ErrorDataResult<int>(errors);
+        }
+
         var car = new Car
         {
             Plate = createDto.Plate,
@@ -70,6 +86,13 @@ public class CarService : ICarService
 
     public async Task<IResult> UpdateCar(CarUpdateDto updateDto, CancellationToken ct = default)
     {
+        var validationResult = await _updateValidator.ValidateAsync(updateDto, ct);
+        if (!validationResult.IsValid)
+        {
+            var errors = string.Join(" | ", validationResult.Errors.Select(e => e.ErrorMessage));
+            return new ErrorResult(errors);
+        }
+
         var car = await _carRepository.GetByIdAsync(updateDto.Id, ct);
         if (car == null) return new ErrorResult("Araba bulunamadı.");
 

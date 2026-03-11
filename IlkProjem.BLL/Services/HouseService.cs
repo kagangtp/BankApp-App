@@ -4,6 +4,7 @@ using IlkProjem.Core.Dtos.FileDtos;
 using IlkProjem.Core.Models;
 using IlkProjem.Core.Utilities.Results;
 using IlkProjem.DAL.Interfaces;
+using FluentValidation;
 
 namespace IlkProjem.BLL.Services;
 
@@ -11,15 +12,30 @@ public class HouseService : IHouseService
 {
     private readonly IHouseRepository _houseRepository;
     private readonly IFilesService _filesService;
+    private readonly IValidator<HouseCreateDto> _createValidator;
+    private readonly IValidator<HouseUpdateDto> _updateValidator;
 
-    public HouseService(IHouseRepository houseRepository, IFilesService filesService)
+    public HouseService(
+        IHouseRepository houseRepository,
+        IFilesService filesService,
+        IValidator<HouseCreateDto> createValidator,
+        IValidator<HouseUpdateDto> updateValidator)
     {
         _houseRepository = houseRepository;
         _filesService = filesService;
+        _createValidator = createValidator;
+        _updateValidator = updateValidator;
     }
 
     public async Task<IDataResult<int>> AddHouse(HouseCreateDto createDto, CancellationToken ct = default)
     {
+        var validationResult = await _createValidator.ValidateAsync(createDto, ct);
+        if (!validationResult.IsValid)
+        {
+            var errors = string.Join(" | ", validationResult.Errors.Select(e => e.ErrorMessage));
+            return new ErrorDataResult<int>(errors);
+        }
+
         var house = new House
         {
             Address = createDto.Address,
@@ -70,6 +86,13 @@ public class HouseService : IHouseService
 
     public async Task<IResult> UpdateHouse(HouseUpdateDto updateDto, CancellationToken ct = default)
     {
+        var validationResult = await _updateValidator.ValidateAsync(updateDto, ct);
+        if (!validationResult.IsValid)
+        {
+            var errors = string.Join(" | ", validationResult.Errors.Select(e => e.ErrorMessage));
+            return new ErrorResult(errors);
+        }
+
         var house = await _houseRepository.GetByIdAsync(updateDto.Id, ct);
         if (house == null) return new ErrorResult("Ev bulunamadı.");
 
