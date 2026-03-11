@@ -1,4 +1,6 @@
-bin/
-obj/
-.git/
-.vscode/
+**/bin/
+**/obj/
+**/.git/
+**/.vscode/
+**/publish/
+IlkProjem.UI/
